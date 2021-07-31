@@ -1,0 +1,33 @@
+.alert {
+  border: 2px solid #E3350D;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 50px auto;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #fff;
+
+  span {
+    color: #E3350D;
+    font-size: 23px;
+    text-transform: none;
+  }
+
+  p {
+    color: #919191;
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  li {
+    color: #919191;
+    padding: 8px 0 0 20px;
+  }
+}
