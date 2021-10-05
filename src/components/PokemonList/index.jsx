@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 
 import { Container, Card, CardMedia, CardContent } from "@material-ui/core";
 
 import "./styles.scss";
+import { usePokemon } from "../../contexts/usePokemon";
 
 export function PokemonList() {
-  const [pokemon, setPokemon] = useState(false);
+  const history = useHistory();
+  const {pokemon, setPokemon, pokemonSearch, setIdSelected} = usePokemon();
   const [nextPokemon, setNextPokemon] = useState(false);
 
-const API_IMAGE =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork";  
+  const pokemonImages =
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork";
 
   async function getPokemonList() {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon");
@@ -17,6 +20,7 @@ const API_IMAGE =
     setPokemon(data);
     setNextPokemon(data.next);
   }
+
   async function loadMorePokemon() {
     const response = await fetch(nextPokemon);
     const data = await response.json();
@@ -27,18 +31,27 @@ const API_IMAGE =
     setPokemon({ ...pokemon, results: test3 });
   }
 
+  async function handlePokemonInfo(id) {
+    setIdSelected(id)
+    history.push(`/pokemon/${id}`);
+  }
+
   useEffect(() => {
     getPokemonList();
   }, []);
+
+  useEffect(() => {
+    if (pokemonSearch) return console.log(`voce pesquisou ${pokemonSearch}`)
+  }, [pokemonSearch]);
 
   return (
     <Container>
       <div className="poke-list">
         {pokemon?.results?.map((poke, index) => (
-          <Card className="poke-cards" key={poke.name}>
+          <Card onClick={() => handlePokemonInfo(index + 1)} className="poke-cards" key={poke.name}>
             <CardMedia
               className="poke-images"
-              image={`${API_IMAGE}/${index + 1}.png`}
+              image={`${pokemonImages}/${index + 1}.png`}
             />
             <CardContent>
               <p>#{poke.url.substr(34).replace("/", "")}</p>

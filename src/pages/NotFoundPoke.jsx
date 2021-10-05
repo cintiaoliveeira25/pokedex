@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Header } from "../components/Header";
-import { PokemonList } from "../components/PokemonList";
+import { NotFound } from "../components/NotFound";
 
-export function Home() {
+export function NotFoundPoke() {
   return (
     <div>
       <Header/>
-      <PokemonList/>
+      <NotFound/>
     </div>
   )
 }

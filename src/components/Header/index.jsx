@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Grid, Container, Button } from "@material-ui/core";
 
 import SearchIcon from "@material-ui/icons/Search";
 
 import "./styles.scss";
+import { usePokemon } from "../../contexts/usePokemon";
 
 export function Header() {
+  const [pokeName, setPokeName] = useState('')
+  const {setPokemonSearch} = usePokemon();
+
+
+  const handleChangeName = (name) => {
+    setPokeName(name.trim())
+  }
+
+  async function searchPokemon() {
+    setPokemonSearch(pokeName)
+  }
+
   return (
     <div className="header">
       <Container>
@@ -14,13 +27,14 @@ export function Header() {
           <Grid  item xs={6}>
             <span>Name or Number</span>
             <br />
-            <input type="text" />
-            <Button variant="contained" className="search-icon">
+            <input type="text" onChange={(event) => handleChangeName(event.target.value)} />
+            <Button variant="contained" className="search-icon" onClick={searchPokemon}>
               <SearchIcon  />
             </Button>
             <p className="subtitle">
-              Use the Advanced Search to explore Pokémon by type, weakness,
-              Ability, and more!
+              Search for a Pokémon by name or using its National Pokédex number.
+              {/* Use the Advanced Search to explore Pokémon by type, weakness,
+              Ability, and more! */}
             </p>
           </Grid>
           <Grid item xs={6}>
