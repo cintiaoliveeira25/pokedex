@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
+import { useHistory } from "react-router-dom";
 import { Grid, Container, Button } from "@material-ui/core";
 
 import SearchIcon from "@material-ui/icons/Search";
 
 import "./styles.scss";
-import { usePokemon } from "../../contexts/usePokemon";
 
 export function Header() {
-  const [pokeName, setPokeName] = useState('')
-  const {setPokemonSearch} = usePokemon();
+  const history = useHistory();
+  const [pokeName, setPokeName] = useState('');
 
 
   const handleChangeName = (name) => {
@@ -17,7 +17,7 @@ export function Header() {
   }
 
   async function searchPokemon() {
-    setPokemonSearch(pokeName)
+    history.push('/notfound');
   }
 
   return (
@@ -32,9 +32,9 @@ export function Header() {
               <SearchIcon  />
             </Button>
             <p className="subtitle">
-              Search for a Pokémon by name or using its National Pokédex number.
-              {/* Use the Advanced Search to explore Pokémon by type, weakness,
-              Ability, and more! */}
+              {/* Search for a Pokémon by name or using its National Pokédex number. */}
+              Use the Advanced Search to explore Pokémon by type, weakness,
+              Ability, and more!
             </p>
           </Grid>
           <Grid item xs={6}>

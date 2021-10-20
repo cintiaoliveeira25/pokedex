@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import { Container, Card, CardMedia, CardContent } from "@material-ui/core";
+import { usePokemon } from "../../contexts/usePokemon";
 
 import "./styles.scss";
-import { usePokemon } from "../../contexts/usePokemon";
 
 export function PokemonList() {
   const history = useHistory();
-  const {pokemon, setPokemon, pokemonSearch, setIdSelected} = usePokemon();
+  const { pokemon, setPokemon, setIdSelected } = usePokemon();
   const [nextPokemon, setNextPokemon] = useState(false);
 
   const pokemonImages =
@@ -26,13 +26,12 @@ export function PokemonList() {
     const data = await response.json();
     setNextPokemon(data.next);
 
-    const test3 = [...pokemon.results, ...data.results];
-    console.log(test3);
-    setPokemon({ ...pokemon, results: test3 });
+    const allPokes = [...pokemon.results, ...data.results];
+    setPokemon({ ...pokemon, results: allPokes });
   }
 
   async function handlePokemonInfo(id) {
-    setIdSelected(id)
+    setIdSelected(id);
     history.push(`/pokemon/${id}`);
   }
 
@@ -40,15 +39,15 @@ export function PokemonList() {
     getPokemonList();
   }, []);
 
-  useEffect(() => {
-    if (pokemonSearch) return console.log(`voce pesquisou ${pokemonSearch}`)
-  }, [pokemonSearch]);
-
   return (
     <Container>
       <div className="poke-list">
         {pokemon?.results?.map((poke, index) => (
-          <Card onClick={() => handlePokemonInfo(index + 1)} className="poke-cards" key={poke.name}>
+          <Card
+            onClick={() => handlePokemonInfo(index + 1)}
+            className="poke-cards"
+            key={poke.name}
+          >
             <CardMedia
               className="poke-images"
               image={`${pokemonImages}/${index + 1}.png`}
@@ -59,9 +58,11 @@ export function PokemonList() {
             </CardContent>
           </Card>
         ))}
-        <button className="btn-show-more" onClick={loadMorePokemon}>
-          Load more Pokémon
-        </button>
+        <div className="teste">
+          <button className="btn-show-more" onClick={loadMorePokemon}>
+            Load more Pokémon
+          </button>
+        </div>
       </div>
     </Container>
   );
