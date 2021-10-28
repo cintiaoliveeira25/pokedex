@@ -23,14 +23,162 @@
 
   .row {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    align-items: stretch;
 
-    .background-image {
-      background-color: #F2F2F2;
+    .picture {
+      flex: 1;
+      padding: 0 20px;
+
+      .background-image {
+        background-color: #f2f2f2;
+      }
+    }
+
+    .information {
+      flex: 2;
+      padding: 20px;
+      border: 1px solid black;
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      .types {
+        width: 45%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid black;
+
+        .element {
+          width: 140px;
+          height: 35px;
+          border-radius: 5px;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-transform: capitalize;
+        }
+
+        .type-bug {
+          background-color: #729f3f;
+        }
+
+        .type-dragon {
+          z-index: 9;
+          position: relative; 
+          background: #f16e57;
+        }
+
+        .type-dragon::before {
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0; 
+          right:0;
+          bottom: 50%;
+          left: 0;   
+          background: #53A4CF; 
+        }
+
+        .type-fairy {
+          background-color: #fdb9e9;
+        }
+
+        .type-fire {
+          background-color: #fd7d24;
+        }
+
+        .type-ghost {
+          background-color: #7b62a3;
+        }
+
+        .type-ground {
+          position: relative; 
+          z-index: 9;
+          background: #F7DE3F;
+        }
+
+        .type-ground::before {
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0; 
+          right:0;
+          bottom: 50%;
+          left: 0;   
+          background: #AB9842; 
+        }
+
+        .type-normal {
+          background-color: #a4acaf;
+        }
+
+        .type-psychic {
+          background-color: #f366b9;
+        }
+
+        .type-steel {
+          background-color: #9eb7b8;
+        }
+
+        .type-dark {
+          background-color: #707070;
+        }
+
+        .type-electric {
+          background-color: #eed535;
+        }
+
+        .type-fighting {
+          background-color: #d56723;
+        }
+
+        .type-flying {
+          position: relative; 
+          z-index: 9;
+          background: #36C7EF;
+        }
+
+        .type-flying::before {
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0; 
+          right:0;
+          bottom: 50%;
+          left: 0;   
+          background: #BDB9B8; 
+        }
+
+        .type-grass {
+          background-color: #9bcc50;
+        }
+
+        .type-ice {
+          background-color: #72bef0;
+        }
+
+        .type-poison {
+          background-color: #b97fc9;
+        }
+
+        .type-rock {
+          background-color: #a38c21;
+        }
+
+        .type-water {
+          background-color: #4592c4;
+        }
+      }
     }
   }
-
-
 }
